@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:P="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+<!--spring 核心配置文件-->
+    <!--spring 给创建对象-->
+    <!--<import resource=""></import> 多文件配置的引入-->
+    <context:component-scan base-package="com.smart.wen"></context:component-scan>
+    <bean id="userService" class="com.smart.wen.service.impl.UserServiceImpl"></bean>
+    <bean id="some" class="com.smart.wen.service.impl.SomeService">
+    </bean>
+    <bean id="some2" class="com.smart.wen.service.impl.SomeService"/>
+    <!--属性name和id一样的意思-->
+    <!--scope 默认所有的对象都是单例  普通对象为prototype-->
+    <bean id="user" class="com.smart.wen.bean.User" scope="singleton" init-method="init" destroy-method="destory" lazy-init="true">
+        <property name="name" value="zs"></property>
+        <property name="password" value="123"></property>
+        <property name="address" ref="address"></property>
+        <property name="list" ref="list"></property>
+        <property name="map" ref="map"></property>
+    </bean>
+    <P:map id="map">
+        <entry key="a" value="a"></entry>
+        <entry key="b" value="b"></entry>
+        <entry key="c" value="c"></entry>
+        <entry key="d" value="d"></entry>
+        <entry key="e" value="e"></entry>
+    </P:map>
+    <P:list id="list">
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+        <value>5</value>
+        <value>6</value>
+    </P:list>
+    <bean id="address" class="com.smart.wen.bean.Address" scope="singleton" lazy-init="true">
+        <property name="name" value="广州"></property>
+    </bean>
+</beans>
